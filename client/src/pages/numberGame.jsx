@@ -18,10 +18,11 @@ export default function NumberGame() {
   const [gameStarted, setGameStarted] = React.useState(false); // Track if game has started
   const [showModal, setShowModal] = React.useState(false);
   const [gameEndStats, setGameEndStats] = React.useState(null);
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
   const saveScoreToLeaderboard = async (playerName) => {
     try {
-      const response = await fetch("http://localhost:8000/api/scores", {
+      const response = await fetch(`${API_URL}/api/scores`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

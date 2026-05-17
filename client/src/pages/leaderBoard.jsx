@@ -7,6 +7,9 @@ export default function LeaderBoard() {
   const [sortBy, setSortBy] = useState("score");
   const [error, setError] = useState(null);
 
+  // Get API URL from environment variable or use localhost for development
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+
   // Fetch real data from backend
   useEffect(() => {
     fetchScores();
@@ -15,7 +18,7 @@ export default function LeaderBoard() {
   const fetchScores = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:8000/api/leaderboard");
+      const response = await fetch(`${API_URL}/api/leaderboard`);
       if (!response.ok) throw new Error("Failed to fetch");
       const data = await response.json();
       setScores(data);
