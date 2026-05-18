@@ -146,6 +146,12 @@ export default function NumberGame() {
 
     // Final score calculation
     let finalScore = basePoints + bonusPoints + timeBonus - skipPenalty;
+    // More granular penalty system
+    if (rungsFilled < 5) {
+      finalScore = Math.min(rungsFilled * 7.5, finalScore); // Max ~30 for 4 rungs
+    } else if (rungsFilled < 11) {
+      finalScore = Math.min(rungsFilled * 12, finalScore); // Max ~120 for 10 rungs
+    }
 
     // Ensure score doesn't go negative
     finalScore = Math.max(0, finalScore);
